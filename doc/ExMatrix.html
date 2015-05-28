@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ExMatrix</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+    <link rel="stylesheet" href="css/elixir.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" charset="utf-8">
+      relpath = '';
+      if (relpath != '') relpath += '/';
+    </script>
+
+    <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/highlight.pack.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      hljs.initHighlightingOnLoad();
+      hljs.configure({languages: []}); //disable autodetect
+    </script>
+  </head>
+
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+
+    <section id="content">
+      <div class="breadcrumbs">ExMatrix v0.0.1 &rarr; <a href="overview.html">Overview</a> &rarr; <a href="ExMatrix.html">ExMatrix</a></div>
+      <h1>
+        ExMatrix
+        
+      </h1>
+
+      <ul class="summary_links">
+        
+          <li><a href="#summary">Summary</a></li>
+        
+        
+        
+          <li><a href="#functions_details">Functions</a></li>
+        
+        
+        
+      </ul>
+
+      
+        <section id="moduledoc" class="docstring">
+          <p>ExMatrix is an Elixir library implementing a parallel matrix multiplication algorithm and other utilitiy functions for working with matrices.</p>
+<h2 id="multiplying-matrices">Multiplying matrices</h2>
+<pre><code class="iex elixir">iex&gt; x = [[2,3], [3,5]]
+[[2,3], [3,5]]
+iex&gt; y = [[1,2], [5,-1]]
+[[1,2], [5,-1]]
+iex&gt; ExMatrix.pmultiply(x, y)
+[[17, 1], [28, 1]]
+iex&gt; ExMatrix.multiply(x, y)
+[[17, 1], [28, 1]]</code></pre>
+
+        </section>
+      
+
+      
+        <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L1" class="view_source">Source</a>
+      
+
+      
+        <h2 id="summary">Summary<span class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></span></h2>
+        <table class="summary">
+          <tr>
+  <td class="summary_signature"><a href="#dot_product/2">dot_product(row_a, row_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Calculates the dot-product for two rows of numbers</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#multiply/2">multiply(matrix_a, matrix_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Perform a sequential multiplication of the two matrices, <code>matrix_a</code> and <code>matrix_b</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#new_matrix/2">new_matrix(rows, cols)</a></td>
+  
+    <td class="summary_synopsis"><p>Creates a new matrix that has <code>rows</code> number of rows and <code>cols</code> columns. All cells are initially set to zero</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#pmultiply/2">pmultiply(matrix_a, matrix_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Perform a parallel multiplication of the two matrices, <code>matrix_a</code> and <code>matrix_b</code></p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#random_cells/3">random_cells(rows, cols, max)</a></td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#transpose/1">transpose(cells)</a></td>
+  
+    <td class="summary_synopsis"><p>Transposes the provided <code>matrix</code> so that a 3, 2 matrix would become a 2, 3 matrix. Once transposed the first row in the transposed matrix is actually the first column in the pre-transposed matrix</p>
+</td>
+  
+</tr>
+
+        </table>
+      
+
+      
+
+      
+        <section id="functions_details" class="details_list">
+          <h2>Functions</h2>
+          <section class="detail">
+  <div class="detail_header" id="dot_product/2">
+    <span class="signature"><strong>dot_product(row_a, row_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#dot_product/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>dot_product([number], [number]) :: number</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Calculates the dot-product for two rows of numbers</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L85" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="multiply/2">
+    <span class="signature"><strong>multiply(matrix_a, matrix_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#multiply/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>multiply([[number]], [[number]]) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Perform a sequential multiplication of the two matrices, <code>matrix_a</code> and <code>matrix_b</code>.</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L58" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="new_matrix/2">
+    <span class="signature"><strong>new_matrix(rows, cols)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#new_matrix/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>new_matrix(number, number) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Creates a new matrix that has <code>rows</code> number of rows and <code>cols</code> columns. All cells are initially set to zero.</p>
+<h1 id="example">Example</h1>
+<pre><code class="iex elixir">iex&gt; ExMatrix.new_matrix(4, 5)
+[[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]</code></pre>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L28" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="pmultiply/2">
+    <span class="signature"><strong>pmultiply(matrix_a, matrix_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#pmultiply/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>pmultiply([[number]], [[number]]) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Perform a parallel multiplication of the two matrices, <code>matrix_a</code> and <code>matrix_b</code>.</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L72" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="random_cells/3">
+    <span class="signature"><strong>random_cells(rows, cols, max)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#random_cells/3" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>random_cells(integer, integer, integer) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L122" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="transpose/1">
+    <span class="signature"><strong>transpose(cells)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#transpose/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>transpose([[number]]) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Transposes the provided <code>matrix</code> so that a 3, 2 matrix would become a 2, 3 matrix. Once transposed the first row in the transposed matrix is actually the first column in the pre-transposed matrix.</p>
+<h1 id="example">Example</h1>
+<pre><code class="iex elixir">iex&gt; ExMatrix.transpose([[2, 4],[5, 6]])
+[[2, 5], [4, 6]]</code></pre>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L43" class="view_source">Source</a>
+  
+</section>
+
+        </section>
+      
+
+      
+
+      
+    </section>
+  </body>
+</html>
