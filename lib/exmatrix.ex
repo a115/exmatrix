@@ -73,7 +73,7 @@ defmodule ExMatrix do
     new_b = transpose(matrix_b)
 
     pmap(matrix_a, fn(row)->
-      pmap(new_b, &dot_product(row, &1))
+      Enum.map(new_b, &dot_product(row, &1))
     end)
   end
 
