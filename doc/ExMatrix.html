@@ -67,6 +67,20 @@ iex&gt; ExMatrix.multiply(x, y)
         <h2 id="summary">Summary<span class="detail_header_links"><a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a></span></h2>
         <table class="summary">
           <tr>
+  <td class="summary_signature"><a href="#add/2">add(matrix_a, matrix_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Adds two matrices of the same dimensions, returning a new matrix of the same dimensions. If two non-matching matrices are provided an ArgumentError will be raised</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#add_rows/2">add_rows(row_a, row_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Adds two rows together to return a new row</p>
+</td>
+  
+</tr>
+<tr>
   <td class="summary_signature"><a href="#dot_product/2">dot_product(row_a, row_b)</a></td>
   
     <td class="summary_synopsis"><p>Calculates the dot-product for two rows of numbers</p>
@@ -99,6 +113,27 @@ iex&gt; ExMatrix.multiply(x, y)
   
 </tr>
 <tr>
+  <td class="summary_signature"><a href="#size/1">size(matrix)</a></td>
+  
+    <td class="summary_synopsis"><p>Returns the size of the matrix as {rows, columns}</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#subtract/2">subtract(matrix_a, matrix_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Subtracts two matrices of the same dimensions, returning a new matrix of the same dimensions. If two non-matching matrices are provided an ArgumentError will be raised</p>
+</td>
+  
+</tr>
+<tr>
+  <td class="summary_signature"><a href="#subtract_rows/2">subtract_rows(row_a, row_b)</a></td>
+  
+    <td class="summary_synopsis"><p>Subtracts two rows to return a new row</p>
+</td>
+  
+</tr>
+<tr>
   <td class="summary_signature"><a href="#transpose/1">transpose(cells)</a></td>
   
     <td class="summary_synopsis"><p>Transposes the provided <code>matrix</code> so that a 3, 2 matrix would become a 2, 3 matrix. Once transposed the first row in the transposed matrix is actually the first column in the pre-transposed matrix</p>
@@ -115,6 +150,56 @@ iex&gt; ExMatrix.multiply(x, y)
         <section id="functions_details" class="details_list">
           <h2>Functions</h2>
           <section class="detail">
+  <div class="detail_header" id="add/2">
+    <span class="signature"><strong>add(matrix_a, matrix_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#add/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>add([[number]], [[number]]) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Adds two matrices of the same dimensions, returning a new matrix of the same dimensions. If two non-matching matrices are provided an ArgumentError will be raised.</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L86" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="add_rows/2">
+    <span class="signature"><strong>add_rows(row_a, row_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#add_rows/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>add_rows([number], [number]) :: [number]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Adds two rows together to return a new row</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L134" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
   <div class="detail_header" id="dot_product/2">
     <span class="signature"><strong>dot_product(row_a, row_b)</strong></span>
     <div class="detail_header_links">
@@ -136,7 +221,7 @@ iex&gt; ExMatrix.multiply(x, y)
 
   </section>
   
-    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L85" class="view_source">Source</a>
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L124" class="view_source">Source</a>
   
 </section>
 <section class="detail">
@@ -238,7 +323,82 @@ iex&gt; ExMatrix.multiply(x, y)
     
   </section>
   
-    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L122" class="view_source">Source</a>
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L179" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="size/1">
+    <span class="signature"><strong>size(matrix)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#size/1" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>size([[number]]) :: {number, number}</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Returns the size of the matrix as {rows, columns}.</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L116" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="subtract/2">
+    <span class="signature"><strong>subtract(matrix_a, matrix_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#subtract/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>subtract([[number]], [[number]]) :: [[number]]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Subtracts two matrices of the same dimensions, returning a new matrix of the same dimensions. If two non-matching matrices are provided an ArgumentError will be raised.</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L102" class="view_source">Source</a>
+  
+</section>
+<section class="detail">
+  <div class="detail_header" id="subtract_rows/2">
+    <span class="signature"><strong>subtract_rows(row_a, row_b)</strong></span>
+    <div class="detail_header_links">
+      <span class="detail_type">(function)</span>
+      <a href="#subtract_rows/2" class="detail_link" title="Link to this function">#</a>
+      <a class="to_top_link" href="#content" title="To the top of the page">&uarr;</a>
+    </div>
+  </div>
+  
+    <p>Specs:</p>
+    <ul class="spec">
+      
+        <li>subtract_rows([number], [number]) :: [number]</li>
+      
+    </ul>
+  
+  <section class="docstring">
+    <p>Subtracts two rows to return a new row</p>
+
+  </section>
+  
+    <a href="https://github.com/a115/exmatrix/blob/master/lib/exmatrix.ex#L143" class="view_source">Source</a>
   
 </section>
 <section class="detail">

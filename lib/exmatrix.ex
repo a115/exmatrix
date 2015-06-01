@@ -77,6 +77,45 @@ defmodule ExMatrix do
     end)
   end
 
+  @doc """
+  Adds two matrices of the same dimensions, returning a new matrix of the
+  same dimensions.  If two non-matching matrices are provided an ArgumentError
+  will be raised.
+  """
+  @spec add([[number]], [[number]]) :: [[number]]
+  def add(matrix_a, matrix_b) do
+    case size(matrix_a) == size(matrix_b) do
+      false -> raise ArgumentError, message: "Cannot add matrices of different dimensions"
+      _ -> nil
+    end
+
+    Stream.zip(matrix_a, matrix_b)
+    |> Enum.map(fn({a,b})-> add_rows(a, b) end)
+  end
+
+  @doc """
+  Subtracts two matrices of the same dimensions, returning a new matrix of the
+  same dimensions.  If two non-matching matrices are provided an ArgumentError
+  will be raised.
+  """
+  @spec subtract([[number]], [[number]]) :: [[number]]
+  def subtract(matrix_a, matrix_b) do
+    case size(matrix_a) == size(matrix_b) do
+      false -> raise ArgumentError, message: "Cannot add matrices of different dimensions"
+      _ -> nil
+    end
+
+    Stream.zip(matrix_a, matrix_b)
+    |> Enum.map(fn({a,b})-> subtract_rows(a, b) end)
+  end
+
+  @doc """
+  Returns the size of the matrix as {rows, columns}.
+  """
+  @spec size([[number]]) :: {number, number}
+  def size(matrix) do
+    {length(matrix), length(Enum.at(matrix, 0))}
+  end
 
   @doc """
   Calculates the dot-product for two rows of numbers
@@ -86,6 +125,24 @@ defmodule ExMatrix do
     Stream.zip(row_a, row_b)
     |> Enum.map(fn({x, y}) -> x * y end)
     |> Enum.sum
+  end
+
+  @doc """
+  Adds two rows together to return a new row
+  """
+  @spec add_rows([number], [number]) :: [number]
+  def add_rows(row_a, row_b) do
+    Stream.zip(row_a, row_b)
+    |> Enum.map(fn({x, y}) -> x + y end)
+  end
+
+  @doc """
+  Subtracts two rows to return a new row
+  """
+  @spec subtract_rows([number], [number]) :: [number]
+  def subtract_rows(row_a, row_b) do
+    Stream.zip(row_a, row_b)
+    |> Enum.map(fn({x, y}) -> x - y end)
   end
 
   """

@@ -1,4 +1,4 @@
-defmodule ExMatrixTest do
+defmodule ExMatrixMultiplicationTest do
   use ExUnit.Case
   import ExMatrix
 
