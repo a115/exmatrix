@@ -1,11 +1,13 @@
-# ExMatrix 
+# ExMatrix
+
+![](https://travis-ci.org/a115/exmatrix.svg) ![hex.pm version](https://img.shields.io/hexpm/v/exmatrix.svg?style=flat)
 
 
 ExMatrix is an Elixir library implementing a parallel matrix multiplication algorithm with other utilities for working with matrices.
 
 ### Installation
 
-The latest version is `0.0.1` and requires Elixir `~> 1.0`. 
+The latest version is `0.0.1` and requires Elixir `~> 1.0`.
 
 Releases are published through [hex.pm](https://hex.pm/packages/exmatrix). Add as a dependency in your `mix.exs` file:
 
@@ -15,7 +17,7 @@ defp deps do
 end
 ```
 
-### Matrices 
+### Matrices
 
 Matrices are expected to be lists of lists of numbers, so for example, a simple 2x2 matrix might look like
 
@@ -93,7 +95,7 @@ The ```size``` function will return the number of rows and columns in your matri
 ```elixir
 iex> {rows, cols} = ExMatrix.size([[1,2,3], [4, 5, 6], [7, 8, 9]])
 {3, 3}
-iex> rows 
+iex> rows
 3
 ```
 
