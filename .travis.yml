@@ -1,0 +1,6 @@
+language: elixir
+sudo: false
+otp_release:
+  - 17.5
+script:
+  - mix test
