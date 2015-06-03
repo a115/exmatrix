@@ -1,5 +1,6 @@
 # ExMatrix
 
+
 ![](https://travis-ci.org/a115/exmatrix.svg) ![hex.pm version](https://img.shields.io/hexpm/v/exmatrix.svg?style=flat)
 
 
@@ -107,6 +108,63 @@ You can transpose a matrix so that the columns become rows (rotating the matrix 
 iex> ExMatrix.transpose([[1,2,3], [4, 5, 6], [7, 8, 9]])
 [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 ```
+
+
+
+## Benchmarks
+
+The initial aim of ExMatrix was to benchmark how well it performed when scaled across a differing number of CPU cores.  Rather than measure the number-crunching ability of Elixir, the benchmarks included measure how well it performs when large matrices are multiplied on 1, 2, 4 and 8 cores.  
+
+You can run the benchmarks yourself using the mix bench command.
+
+
+```elixir
+MIX_ENV=prod mix bench
+```
+
+To try the benchmark with differing numbers of cores, depends on your operating system.  
+
+* OSX - Use Instruments.app where in the Preferences pane you can change the number of active cores.
+* Linux - This [page on stackexchange](http://unix.stackexchange.com/questions/145645/diabling-cpu-cores-on-quad-core-processor-on-linux) describes how to turn off individual cores on linux.
+* Windows - You can turn off individual cores using the steps described [here]
+(http://en.kioskea.net/faq/616-multicore-cpu-how-to-disable-a-core#procedure-when-using-windows-vista-7-and-xp) 
+
+
+### OSX - 8 cores, 16Gb RAM
+
+The following results show the outcome of running the benchmarks on the author's machine (OSX, 8cores, 16Gb) using 1, 2, 4 and 8 cores.  The matrix sizes used were 50x50, 100x100, 200x200, 400x400.  There is a threshold (to be determined) below which the size of the computation on the matrix is  apparently outweighed by the time taken to spawn and wait for the processes.  The charts below show for the 50x50 and 100x100 matrices no better performance between 1 and 2 cores, and it maybe that the threshold is around this point.
+
+#### Total times
+
+The table below shows the times (in ms) as reported by [benchfella](https://github.com/alco/benchfella).  
+
+|   | 50x50  |  100x100 | 200x200  | 400x400   |
+|---|---|---|---|---|
+| **1 core**   |  101  | 817   |  7881   |  74524  |
+| **2 cores**  | 105  |  795  |  6028  |  51493  |
+| **4 cores**  |  54  | 404  | 3340  | 27339   |
+| **8 cores**   | 31  |  240  |  1858 |  15179 |
+
+
+#### 50x50 Matrix
+
+![](doc/img/50x50.png)
+
+#### 100x100 Matrix
+
+![](doc/img/100x100.png)
+
+#### 200x200
+
+![](doc/img/200x200.png)
+
+#### 400x400
+
+![](doc/img/400x400.png)
+
+
+
+
 
 
 
