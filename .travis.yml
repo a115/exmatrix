@@ -2,5 +2,3 @@ language: elixir
 sudo: false
 otp_release:
   - 17.4
-script:
-  - mix test
