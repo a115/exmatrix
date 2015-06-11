@@ -43,7 +43,7 @@ int int_dot_product(int *a, int *b, int n)
 double* ListToDoubleArray(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
   ERL_NIF_TERM head, tail;
   unsigned int i = 0;
-  double *result = malloc(size * sizeof(double));
+  double *result = enif_alloc((size+1) * sizeof(int));
   double x = 0.0;
 
   while(enif_get_list_cell(env, v, &head, &tail)) {
@@ -73,8 +73,28 @@ int * ListToIntegerArray(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
   return result;
 }
 
+static ERL_NIF_TERM _dotproduct_float(ErlNifEnv* env, int UNUSED(arc), const ERL_NIF_TERM argv[])
+{
+  double dp = 0;
 
-static ERL_NIF_TERM _dotproduct(ErlNifEnv* env, int UNUSED(arc), const ERL_NIF_TERM argv[])
+  unsigned int ra_size = 0;
+  enif_get_list_length(env,  argv[0], &ra_size);
+  double *row_a = ListToDoubleArray(env, argv[0], ra_size );
+
+  unsigned int rb_size = 0;
+  enif_get_list_length(env,  argv[1], &rb_size);
+  double *row_b = ListToDoubleArray(env, argv[1], rb_size );
+
+  dp = double_dot_product(row_a, row_b, ra_size);
+
+  enif_free(row_a);
+  enif_free(row_b);
+
+  return enif_make_double(env, dp);
+}
+
+
+static ERL_NIF_TERM _dotproduct_int(ErlNifEnv* env, int UNUSED(arc), const ERL_NIF_TERM argv[])
 {
   int dp = 0;
 
@@ -96,7 +116,8 @@ static ERL_NIF_TERM _dotproduct(ErlNifEnv* env, int UNUSED(arc), const ERL_NIF_T
 
 static ErlNifFunc nif_funcs[] =
 {
-  {"_dotproduct", 2, _dotproduct, 0}
+  {"_dotproduct_int", 2, _dotproduct_int, 0},
+  {"_dotproduct_float", 2, _dotproduct_float, 0}
 };
 
 ERL_NIF_INIT(Elixir.ExMatrix.NIF,nif_funcs,NULL,NULL,NULL,NULL)

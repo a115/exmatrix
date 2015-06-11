@@ -25,8 +25,8 @@ defmodule ExMatrixMultiplicationTest do
   end
 
   test "simple parallel multiply" do
-    x = [[2,3], [3,5]]
-    y = [[1,2], [5,-1]]
+    x = [[2.0,3.0], [3.0, 5.0]]
+    y = [[1.0,2.0], [5.0,-1.0]]
     z = pmultiply(x, y)
     assert z == [[17, 1], [28, 1]]
   end
