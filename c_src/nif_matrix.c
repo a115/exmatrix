@@ -16,10 +16,6 @@
 #include <strings.h>
 #include <unistd.h>
 
-#define MAXBUFLEN 1024
-
-
-
 double double_dot_product(double *a, double *b, int n)
 {
     int i = 0;
@@ -40,7 +36,7 @@ int int_dot_product(int *a, int *b, int n)
 }
 
 
-double* ListToDoubleArray(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
+double* list_to_double_array(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
   ERL_NIF_TERM head, tail;
   unsigned int i = 0;
   double *result = enif_alloc((size+1) * sizeof(int));
@@ -57,7 +53,7 @@ double* ListToDoubleArray(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
 }
 
 
-int * ListToIntegerArray(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
+int * list_to_integer_array(ErlNifEnv* env, ERL_NIF_TERM v, int size) {
   ERL_NIF_TERM head, tail;
   unsigned int i = 0;
   int x = 0;
@@ -79,11 +75,11 @@ static ERL_NIF_TERM _dotproduct_float(ErlNifEnv* env, int UNUSED(arc), const ERL
 
   unsigned int ra_size = 0;
   enif_get_list_length(env,  argv[0], &ra_size);
-  double *row_a = ListToDoubleArray(env, argv[0], ra_size );
+  double *row_a = list_to_double_array(env, argv[0], ra_size );
 
   unsigned int rb_size = 0;
   enif_get_list_length(env,  argv[1], &rb_size);
-  double *row_b = ListToDoubleArray(env, argv[1], rb_size );
+  double *row_b = list_to_double_array(env, argv[1], rb_size );
 
   dp = double_dot_product(row_a, row_b, ra_size);
 
@@ -100,11 +96,11 @@ static ERL_NIF_TERM _dotproduct_int(ErlNifEnv* env, int UNUSED(arc), const ERL_N
 
   unsigned int ra_size = 0;
   enif_get_list_length(env,  argv[0], &ra_size);
-  int *row_a = ListToIntegerArray(env, argv[0], ra_size );
+  int *row_a = list_to_integer_array(env, argv[0], ra_size );
 
   unsigned int rb_size = 0;
   enif_get_list_length(env,  argv[1], &rb_size);
-  int *row_b = ListToIntegerArray(env, argv[1], rb_size );
+  int *row_b = list_to_integer_array(env, argv[1], rb_size );
 
   dp = int_dot_product(row_a, row_b, ra_size);
 
