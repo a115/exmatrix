@@ -45,6 +45,5 @@ defmodule ExMatrixMultiplicationTest do
     assert length(result) == 50
   end
 
-
 end
 

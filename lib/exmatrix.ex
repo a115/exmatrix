@@ -26,7 +26,7 @@ defmodule ExMatrix do
   """
   @spec new_matrix(number, number) :: [[number]]
   def new_matrix(rows, cols) do
-    for n <- 1 .. rows, do: generate_zero_filled_row(cols)
+    for _ <- 1 .. rows, do: generate_zero_filled_row(cols)
   end
 
 
@@ -59,7 +59,7 @@ defmodule ExMatrix do
     new_b = transpose(matrix_b)
 
     Enum.map(matrix_a, fn(row)->
-      Enum.map(new_b, &dot_product(row, &1))
+      Enum.map(new_b, &ExMatrix.NIF.dotproduct(row, &1))
     end)
   end
 
@@ -73,7 +73,7 @@ defmodule ExMatrix do
     new_b = transpose(matrix_b)
 
     pmap(matrix_a, fn(row)->
-      Enum.map(new_b, &dot_product(row, &1))
+      Enum.map(new_b, &ExMatrix.NIF.dotproduct(row, &1))
     end)
   end
 
@@ -151,7 +151,7 @@ defmodule ExMatrix do
   """
   @spec generate_zero_filled_row(integer) :: [number]
   defp generate_zero_filled_row(size) do
-    Enum.map(:lists.seq(1, size), fn(x)-> 0 end)
+    Enum.map(:lists.seq(1, size), fn(_)-> 0 end)
   end
 
   """

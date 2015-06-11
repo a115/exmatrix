@@ -4,3 +4,5 @@ erl_crash.dump
 *.ez
 /bench/graphs
 /bench/snapshots
+/priv/*.so
+/priv/*.so.dSYM/

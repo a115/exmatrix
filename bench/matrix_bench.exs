@@ -11,6 +11,7 @@ defmodule MatrixBench do
   @random_a_vlarge random_cells(400, 400, 100)
   @random_b_vlarge random_cells(400, 400, 100)
 
+  """
   bench "transpose a 100x100 matrix" do
     transpose(@random_a_large)
   end
@@ -22,6 +23,7 @@ defmodule MatrixBench do
   bench "transpose a 400x400 matrix" do
     transpose(@random_a_vlarge)
   end
+  """
 
   bench "50x50 matrix in parallel" do
     pmultiply(@random_a, @random_b)
