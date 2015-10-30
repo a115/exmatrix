@@ -185,4 +185,18 @@ defmodule ExMatrix do
     end)
   end
 
+  """
+  Generates an Identity Matrix with 'size' rows and columns
+  """
+  @spec identity_matrix(integer) :: [[number]]
+  def identity_matrix(size) do
+    _identity(size, 0, [])
+  end
+
+  defp _identity(size, pos, matrix) when size == pos, do: matrix
+  defp _identity(size, pos, matrix) do
+    row = generate_zero_filled_row(size) |> List.replace_at(pos, 1)
+    _identity(size, pos + 1, matrix |> List.insert_at(-1, row))
+  end
+
 end
