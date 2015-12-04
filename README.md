@@ -51,7 +51,7 @@ iex> matrix_a = [[2,3], [3,5]]
 [[2,3], [3,5]]
 iex> matrix_b = [[1,2], [5,-1]]
 [[1,2], [5,-1]]
-iex> ExMatrix.muliply(matrix_a, matrix_b)
+iex> ExMatrix.multiply(matrix_a, matrix_b)
 [[17, 1], [28, 1]]
 ```
 
