@@ -145,6 +145,95 @@ defmodule ExMatrix do
     |> Enum.map(fn({x, y}) -> x - y end)
   end
 
+  @doc """
+  Append multiple rows to a matrix
+  """
+  @spec append_rows([[number]], [[number]]) :: [[number]]
+  def append_rows(matrix, rows) when is_list(matrix) and is_list(rows) do
+    if Enum.any?(rows, fn x -> !is_list(x) or Enum.any?(x, fn y -> !is_number(y) end) end) do
+      raise "One of the rows has bad format"
+    end
+    {_, cols} = size(matrix)
+    if Enum.all?(rows, fn x -> is_list(x) and length(x) == cols end) do
+      Enum.reduce(rows, matrix, fn(row, mx) -> List.insert_at(mx, -1, row) end)
+    else
+      raise "One of the rows has a different length than the matrix's column length"
+    end
+  end
+  def append_rows(_, _), do: raise "Matrix and rows have to be lists"
+
+  @doc """
+  Append 1 row to a matrix
+  """
+  @spec append_row([[number]], [number]) :: [[number]]
+  def append_row(matrix, row) when is_list(matrix) and is_list(row) do
+    if is_bitstring(row) or Enum.any?(row, fn x -> !is_number(x) end) do
+      raise "The row has bad format"
+    end
+    {_, cols} = size(matrix)
+    if length(row) == cols do
+      List.insert_at(matrix, -1, row)
+    else
+      raise "The row has a different length than the matrix's column length"
+    end
+  end
+  def append_row(_, _), do: raise "Matrix and row have to be lists"
+
+  @doc """
+  Append multiple columns to a matrix
+  """
+  @spec append_cols([[number]], [[number]]) :: [[number]]
+  def append_cols(matrix, cols) when is_list(matrix) and is_list(cols) do
+    if Enum.any?(cols, fn x -> !is_list(x) or Enum.any?(x, fn y -> !is_number(y) end) end) do
+      raise "One of the cols has bad format"
+    end
+    {rows, _} = size(matrix)
+    if Enum.all?(cols, fn x -> is_list(x) and length(x) == rows end) do
+      #Enum.reduce(cols, matrix, fn(col, mx) -> mx |> Enum.zip(col) |> Enum.map(fn {row, col_item} -> List.insert_at(row, -1, col_item) end) end)
+      Enum.reduce(cols, matrix, fn(col, mx) -> do_append_col(mx, col) end)
+    else
+      raise "One of the cols has a different length than the matrix's column length"
+    end
+  end
+  def append_cols(_, _), do: raise "Matrix and cols have to be lists"
+
+  @doc """
+  Append 1 column to a matrix
+  """
+  @spec append_col([[number]], [number]) :: [[number]]
+  def append_col(matrix, col) when is_list(matrix) and is_list(col) do
+    if is_bitstring(col) or Enum.any?(col, fn x -> !is_number(x) end) do
+      raise "The column has bad format"
+    end
+    {rows, _} = size(matrix)
+    if length(col) == rows do
+      do_append_col(matrix, col)
+    else
+      raise "The column has a different length than the matrix's row length"
+    end
+  end
+  def append_col(_, _), do: raise "Matrix and col have to be lists"
+
+  defp do_append_col(matrix, col) do
+      matrix 
+      |> Enum.zip(col)
+      |> Enum.map(fn {row, col_item} -> List.insert_at(row, -1, col_item) end)
+  end
+
+  """
+  Generates an Identity Matrix with 'size' rows and columns
+  """
+  @spec identity_matrix(integer) :: [[number]]
+  def identity_matrix(size) do
+    _identity(size, 0, [])
+  end
+
+  defp _identity(size, pos, matrix) when size == pos, do: matrix
+  defp _identity(size, pos, matrix) do
+    row = generate_zero_filled_row(size) |> List.replace_at(pos, 1)
+    _identity(size, pos + 1, matrix |> List.insert_at(-1, row))
+  end
+
   """
   Generates a zero-filled list of ```size``` elements, primarily used
   by the default new_matrix function.
@@ -183,20 +272,6 @@ defmodule ExMatrix do
       :lists.seq(1, cols)
       |> Enum.map(fn(_)-> :random.uniform(max) end)
     end)
-  end
-
-  """
-  Generates an Identity Matrix with 'size' rows and columns
-  """
-  @spec identity_matrix(integer) :: [[number]]
-  def identity_matrix(size) do
-    _identity(size, 0, [])
-  end
-
-  defp _identity(size, pos, matrix) when size == pos, do: matrix
-  defp _identity(size, pos, matrix) do
-    row = generate_zero_filled_row(size) |> List.replace_at(pos, 1)
-    _identity(size, pos + 1, matrix |> List.insert_at(-1, row))
   end
 
 end
