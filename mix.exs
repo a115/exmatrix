@@ -19,7 +19,7 @@ defmodule ExMatrix.Mixfile do
   end
 
   defp deps do
-    [{:benchfella, "~> 0.2.0"},
+    [{:benchfella, "~> 0.2.0", only: :dev},
      {:ex_doc, "~> 0.7", only: :dev}]
   end
 
