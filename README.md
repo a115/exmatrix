@@ -1,7 +1,7 @@
 # ExMatrix
 
 
-![](https://travis-ci.org/a115/exmatrix.svg) ![hex.pm version](https://img.shields.io/hexpm/v/exmatrix.svg?style=flat)
+[![Travis CI](https://travis-ci.org/a115/exmatrix.svg)](https://travis-ci.org/a115/exmatrix) [![hex.pm version](https://img.shields.io/hexpm/v/exmatrix.svg?style=flat)](https://hex.pm/packages/exmatrix)
 
 
 ExMatrix is an Elixir library implementing a parallel matrix multiplication algorithm with other utilities for working with matrices.
